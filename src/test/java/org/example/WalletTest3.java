@@ -95,11 +95,9 @@ class WalletTest3 {
         assertFalse(wallet.getListKartu().contains("card2"));
     }
 
-
     @Test
     void testRemoveNoneCard(){
-        wallet = new Wallet(nama_owner, uang_awal, new ArrayList<>());
-        assertThrows(Error.class, () -> wallet.removeCard("card1"));
+        assertThrows(Error.class, () -> wallet.removeCard("card5UUUU"));
     }
 
 

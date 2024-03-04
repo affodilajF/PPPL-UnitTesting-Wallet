@@ -70,6 +70,6 @@ class WalletTest {
     @Test
     void testRemoveNoneCard(){
         Wallet wallet = new Wallet("Aha", 120, new ArrayList<>());
-        assertThrows(Error.class, () -> wallet.removeCard("card1"));
+        assertThrows(Error.class, () -> wallet.removeCard("card5UUUU"));
     }
 }
