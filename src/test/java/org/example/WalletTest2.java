@@ -6,39 +6,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // Tugas pertemuan 3 => Menambahkan Life Cycle (Lifecylce.PER_CLASS)
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class WalletTest2 {
+public class WalletTest2 {
 
     private Wallet wallet;
-    private String nama_owner;
-    private int uang_awal;
-    private ArrayList<String> list_kartu;
-
 
     @BeforeAll
     void initClass(){
-        nama_owner = "Aha";
-        uang_awal = 120;
-        list_kartu = new ArrayList<>(List.of("card1", "card2"));
+        wallet = new Wallet();
     }
 
     @BeforeEach
     void initMethod() {
-        wallet = new Wallet(nama_owner, uang_awal, list_kartu);
+        wallet.setOwner("Aha");
+        wallet.setUangCash(120);
+        wallet.setListKartu(new ArrayList<>(List.of("card1", "card2")));
     }
 
     @AfterEach
-    void cleanMethod(){
-        list_kartu = new ArrayList<>(List.of("card1", "card2"));
-    }
+    void cleanMethod(){}
 
     @AfterAll
     void cleanClass(){
         wallet = null;
+    }
+
+    @Test
+    void testObjectCreation(){
+        String[] cardsExpected = {"card1", "card2"};
+        String[] cardsActual = wallet.getListKartu().toArray(new String[0]);
+
+        assertAll(
+                "Grouped Assertions of Wallet Object",
+                () -> assertEquals("Aha", wallet.getOwner()),
+                () -> assertEquals(120, wallet.getUangCash()),
+                () -> assertArrayEquals(cardsExpected, cardsActual)
+        );
     }
 
     @Test
@@ -56,13 +62,11 @@ class WalletTest2 {
         assertEquals(120.0, wallet.getUangCash());
     }
 
-
     @Test
     void testDeposit() {
         wallet.deposit(30.0);
         assertEquals(150.0, wallet.getUangCash());
     }
-
 
     @Test
     void testAddCard() {
@@ -80,22 +84,10 @@ class WalletTest2 {
         assertFalse(wallet.getListKartu().contains("card2"));
     }
 
-
     @Test
     void testRemoveNoneCard(){
         assertThrows(Error.class, () -> wallet.removeCard("card5UUUU"));
     }
 
-    @Test
-    void testObjectCreation(){
-        String[] cardsExpected = {"card1", "card2"};
-        String[] cardsActual = wallet.getListKartu().toArray(new String[0]);
 
-        assertAll(
-                "Grouped Assertions of Wallet Object",
-                () -> assertEquals("Aha", wallet.getNamaOwner()),
-                () -> assertEquals(120, wallet.getUangCash()),
-                () -> assertArrayEquals(cardsExpected, cardsActual)
-        );
-    }
 }

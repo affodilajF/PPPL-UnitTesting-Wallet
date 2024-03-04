@@ -7,29 +7,15 @@ public class Wallet {
     private double uangCash;
     private ArrayList<String> listKartu;
 
-    public String getNamaOwner()  {
-        return owner;
-    }
-
-    public double getUangCash(){
-        return uangCash;
-    }
-
-    public ArrayList<String> getListKartu() {
-        return listKartu;
-    }
-
-    public void setOwner(String owner){
-        this.owner = owner;
-    }
-
-
+//    constructor
+    public Wallet(){}
     public Wallet(String owner, int uangCash, ArrayList<String> listKartu){
         this.owner = owner;
         this.uangCash = uangCash;
         this.listKartu = listKartu;
     }
 
+//    methods
     public void withdraw(double amount){
         if(this.uangCash < amount){
             throw new Error("Uang tidak menckupi");
@@ -50,5 +36,25 @@ public class Wallet {
         if(!isDeleted){
            throw new Error("Card not found");
         }
+    }
+
+//    setter getter
+    public String getOwner()  {
+        return owner;
+    }
+    public double getUangCash(){
+        return uangCash;
+    }
+    public ArrayList<String> getListKartu() {
+        return listKartu;
+    }
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+    public void setUangCash(double uangCash){
+        this.uangCash = uangCash;
+    }
+    public void setListKartu(ArrayList<String> listKartu){
+        this.listKartu = listKartu;
     }
 }

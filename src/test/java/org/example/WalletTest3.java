@@ -6,42 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // Tugas pertemuan 3 => Menambahkan Life Cycle (Lifecylce.PER_METHOD)
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
-class WalletTest3 {
+public class WalletTest3 {
 
     private static Wallet wallet;
 
-    private static String nama_owner;
-    private static int uang_awal;
-    private static ArrayList<String> list_kartu;
-
-
     @BeforeAll
     static void initClass(){
-        nama_owner = "Aha";
-        uang_awal = 120;
-        list_kartu = new ArrayList<>(List.of("card1", "card2"));
+        wallet = new Wallet();
     }
 
     @BeforeEach
     void initMethod() {
-        wallet = new Wallet(nama_owner, uang_awal, list_kartu);
+        wallet.setOwner("Aha");
+        wallet.setUangCash(120);
+        wallet.setListKartu(new ArrayList<>(List.of("card1", "card2")));
     }
 
     @AfterEach
-    void cleanMethod(){
-        list_kartu = new ArrayList<>(List.of("card1", "card2"));
-    }
+    void cleanMethod(){}
 
     @AfterAll
     static void cleanClass(){
         wallet = null;
     }
-
 
     @Test
     void testObjectCreation(){
@@ -50,7 +41,7 @@ class WalletTest3 {
 
         assertAll(
                 "Grouped Assertions of Wallet Object",
-                () -> assertEquals("Aha", wallet.getNamaOwner()),
+                () -> assertEquals("Aha", wallet.getOwner()),
                 () -> assertEquals(120, wallet.getUangCash()),
                 () -> assertArrayEquals(cardsExpected, cardsActual)
         );
@@ -71,13 +62,11 @@ class WalletTest3 {
         assertEquals(120.0, wallet.getUangCash());
     }
 
-
     @Test
     void testDeposit() {
         wallet.deposit(30.0);
         assertEquals(150.0, wallet.getUangCash());
     }
-
 
     @Test
     void testAddCard() {
@@ -99,6 +88,4 @@ class WalletTest3 {
     void testRemoveNoneCard(){
         assertThrows(Error.class, () -> wallet.removeCard("card5UUUU"));
     }
-
-
 }
