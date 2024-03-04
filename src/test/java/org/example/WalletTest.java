@@ -10,14 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WalletTest {
 
-
     @Test
     void testWithdrawSufficientCash() {
         final int UANG_AWAL = 120;
         Wallet wallet = new Wallet("Aha", UANG_AWAL, new ArrayList<>());
 
         wallet.withdraw(10);
-        assertEquals(110, wallet.uangCash);
+        assertEquals(110, wallet.getUangCash());
     }
 
     @Test
@@ -30,7 +29,7 @@ class WalletTest {
 
         });
 
-        assertEquals(120.0, wallet.uangCash);
+        assertEquals(120.0, wallet.getUangCash());
     }
 
 
@@ -40,7 +39,7 @@ class WalletTest {
         Wallet wallet = new Wallet("Aha", UANG_AWAL, new ArrayList<>());
         wallet.deposit(30.0);
 
-        assertEquals(150.0, wallet.uangCash);
+        assertEquals(150.0, wallet.getUangCash());
     }
 
 
@@ -50,8 +49,8 @@ class WalletTest {
         wallet.addCard("card1");
         wallet.addCard("card2");
         assertAll(
-                () -> assertTrue(wallet.listKartu.contains("card1")),
-                () -> assertTrue(wallet.listKartu.contains("card2"))
+                () -> assertTrue(wallet.getListKartu().contains("card1")),
+                () -> assertTrue(wallet.getListKartu().contains("card2"))
         );
     }
 
@@ -64,7 +63,7 @@ class WalletTest {
 
         wallet.removeCard("card1");
 
-        assertFalse(wallet.listKartu.contains("card1"));
+        assertFalse(wallet.getListKartu().contains("card1"));
     }
 
 

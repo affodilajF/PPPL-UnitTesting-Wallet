@@ -4,8 +4,25 @@ import java.util.ArrayList;
 
 public class Wallet {
     private String owner;
-    double uangCash;
-    ArrayList<String> listKartu;
+    private double uangCash;
+    private ArrayList<String> listKartu;
+
+    public String getNamaOwner()  {
+        return owner;
+    }
+
+    public double getUangCash(){
+        return uangCash;
+    }
+
+    public ArrayList<String> getListKartu() {
+        return listKartu;
+    }
+
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+
 
     public Wallet(String owner, int uangCash, ArrayList<String> listKartu){
         this.owner = owner;
